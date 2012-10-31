@@ -62,7 +62,7 @@ class CityController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new City;
+		$model=new City;   
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -155,6 +155,12 @@ class CityController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+  
+  public function getProjects(){
+      $options = Country::model()->find();
+      $countryArray = CHtml::listData($options, 'id', 'name');
+      return $countryArray;
+  }
 
 	/**
 	 * Performs the AJAX validation.

@@ -23,7 +23,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'country_id'); ?>
-		<?php echo $form->textField($model,'country_id'); ?>
+    <?php echo $form->dropDownList($model,'country_id', $this->getProjects()); ?>
+		<?php //echo $form->textField($model,'country_id'); ?>
 		<?php echo $form->error($model,'country_id'); ?>
 	</div>
 
