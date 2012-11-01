@@ -20,11 +20,22 @@ $this->menu=array(
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
-	'attributes'=>array(
-		'id',
+	'attributes'=>array(		
 		'first_name',
 		'last_name',
 		'email',
-		'password',
+                array(
+                  'label' => 'City',
+                  'value' => $model->city->name,
+                ),
+                array(
+                  'label' => 'Country',
+                  'value' => $model->city->country->name,
+                ),
+                array(
+                  'label' => 'Role',
+                  'value' => $model->role->name,
+                ),
+                
 	),
 )); ?>

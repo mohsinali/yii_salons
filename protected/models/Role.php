@@ -1,19 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "{{city}}".
+ * This is the model class for table "{{role}}".
  *
- * The followings are the available columns in table '{{city}}':
+ * The followings are the available columns in table '{{role}}':
  * @property integer $id
  * @property string $name
- * @property integer $country_id
  */
-class City extends CActiveRecord
+class Role extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return City the static model class
+	 * @return Role the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +24,7 @@ class City extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{city}}';
+		return '{{role}}';
 	}
 
 	/**
@@ -36,12 +35,11 @@ class City extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, country_id', 'required'),
-			array('country_id', 'numerical', 'integerOnly'=>true),
+			array('name', 'required'),
 			array('name', 'length', 'max'=>150),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, country_id', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +51,6 @@ class City extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
 		);
 	}
 
@@ -64,8 +61,7 @@ class City extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'City',
-			'country_id' => 'Country',
+			'name' => 'Name',
 		);
 	}
 
@@ -82,7 +78,6 @@ class City extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('country_id',$this->country_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

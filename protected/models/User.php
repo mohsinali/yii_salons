@@ -12,6 +12,7 @@
  */
 class User extends CActiveRecord
 {
+        public $repeat_password;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -41,7 +42,12 @@ class User extends CActiveRecord
 			array('first_name, last_name, email, password', 'required', 'message' => '{attribute} is required.'),
 			array('first_name, last_name', 'length', 'max'=>200),
 			array('email', 'length', 'max'=>100),
-			array('password', 'length', 'max'=>255),
+                        array('email', 'email'),
+			array('password', 'required'),
+                        array('password', 'length', 'min' => 6, 'max' => 40),
+                        array('repeat_password', 'required'),
+                        array('repeat_password', 'length', 'min' => 6, 'max' => 40),
+                        array('password', 'compare', 'compareAttribute' => 'repeat_password'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, email, password', 'safe', 'on'=>'search'),
@@ -56,6 +62,8 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'city' => array(self::BELONGS_TO, 'City', 'city_id'),
+                    'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
 		);
 	}
 
@@ -70,6 +78,7 @@ class User extends CActiveRecord
 			'last_name' => 'Last Name',
 			'email' => 'Email',
 			'password' => 'Password',
+                        'city_id' => 'City',
 		);
 	}
 

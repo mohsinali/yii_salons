@@ -23,6 +23,9 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'name',
-		'country_id',
+                array(
+                    'label' => 'Country',
+                    'value' => $model->country->name,
+                ),		
 	),
 )); ?>

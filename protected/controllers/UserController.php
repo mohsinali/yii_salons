@@ -155,6 +155,19 @@ class UserController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        
+        public function getCityList(){
+            $cities = City::model()->findall();
+            $citiesArray = CHtml::listData($cities, 'id', 'name');
+            
+            return $citiesArray;
+        }
+        
+        public function getCountryList(){
+            $options = Country::model()->findall();
+            $countryArray = CHtml::listData($options, 'id', 'name');
+            return $countryArray;
+        }
 
 	/**
 	 * Performs the AJAX validation.
@@ -168,4 +181,6 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        
 }
