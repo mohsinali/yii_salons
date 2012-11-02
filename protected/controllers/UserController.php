@@ -27,8 +27,8 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+			array('allow',  // allow all users to perform 'create' and 'view' actions
+				'actions'=>array('create'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -36,7 +36,7 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index', 'view' ,'admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -63,15 +63,24 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                    $model->attributes=$_POST['User'];
+                    $model->city_id = $_POST['city_id'];
+                    $model->role_id = 3; // 3 is for authenticated user.
+                    
+                    $rnd = rand(0, 9999);
+                    $uploadedFile = CUploadedFile::getInstance($model, 'profile_image');
+                    $fileName = "{$rnd}-{$uploadedFile}";
+                    $model->profile_image = $fileName;
+
+                    if($model->save()){
+                        $uploadedFile->saveAs(Yii::app()->basePath.'/files/user_profile_pictures/'.$fileName);
+                        $this->redirect(array('view','id'=>$model->id));
+                    }
 		}
 
 		$this->render('create',array(
@@ -87,13 +96,13 @@ class UserController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+                
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['User'];                        
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

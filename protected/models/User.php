@@ -48,6 +48,7 @@ class User extends CActiveRecord
                         array('repeat_password', 'required'),
                         array('repeat_password', 'length', 'min' => 6, 'max' => 40),
                         array('password', 'compare', 'compareAttribute' => 'repeat_password'),
+                        array('profile_image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => false, 'message' => '{attribute} is required.'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, email, password', 'safe', 'on'=>'search'),
@@ -79,6 +80,8 @@ class User extends CActiveRecord
 			'email' => 'Email',
 			'password' => 'Password',
                         'city_id' => 'City',
+                        'role_id' => 'Role',
+                        'profile_image' => 'Profile picture',
 		);
 	}
 
