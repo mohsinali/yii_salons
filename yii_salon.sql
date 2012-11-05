@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 02, 2012 at 05:40 PM
+-- Generation Time: Nov 05, 2012 at 06:19 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -64,8 +64,7 @@ INSERT INTO `tbl_country` (`id`, `name`) VALUES
 (1, 'Pakistan'),
 (2, 'India'),
 (3, 'China'),
-(4, 'UK'),
-(5, 'Peshawar');
+(4, 'UK');
 
 -- --------------------------------------------------------
 
@@ -133,14 +132,15 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `profile_image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`, `email`, `password`, `city_id`, `role_id`, `profile_image`) VALUES
-(1, 'Mohsin', 'Ali', 'ma@yahoo.com', '123', 1, 1, NULL),
-(2, 'Ikram', 'Haq', 'ik@yahoo.com', '321321', 2, 2, NULL),
-(8, 'Noman', 'Ahmed', 'nm@yahoo.com', '123123', 3, 3, NULL),
-(15, 'John', 'Smith', 'john@yahoo.com', '321321', 4, 3, '2879-right-banner-4.jpg');
+(1, 'Mohsin', 'Ali', 'ma@yahoo.com', '202cb962ac59075b964b07152d234b70', 1, 1, NULL),
+(2, 'Ikram', 'Haq', 'ik@yahoo.com', '202cb962ac59075b964b07152d234b70', 2, 2, NULL),
+(8, 'Noman', 'Ahmed', 'nm@yahoo.com', '202cb962ac59075b964b07152d234b70', 3, 3, NULL),
+(15, 'John', 'Smith', 'john@yahoo.com', '202cb962ac59075b964b07152d234b70', 4, 3, '2879-right-banner-4.jpg'),
+(17, 'New', 'Password', 'new@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, 3, '765-right-banner-2.jpg');

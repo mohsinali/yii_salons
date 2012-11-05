@@ -30,8 +30,17 @@ class User extends CActiveRecord
 	{
 		return '{{user}}';
 	}
+        
+        /**
+        * perform one-way encryption on the password before we store it in the database
+        */
+       protected function beforeSave(){
+           //parent::afterValidate();
+           $this->password = $this->encrypt($this->password);
+           return true;
+           }
 
-	/**
+       /**
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -106,4 +115,8 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function encrypt($value){
+            return md5($value);
+        }
 }
