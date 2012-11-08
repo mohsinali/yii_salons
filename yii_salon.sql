@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 05, 2012 at 06:19 PM
+-- Generation Time: Nov 08, 2012 at 03:33 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -18,6 +18,71 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `yii_salon`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AuthAssignment`
+--
+
+DROP TABLE IF EXISTS `AuthAssignment`;
+CREATE TABLE IF NOT EXISTS `AuthAssignment` (
+  `itemname` varchar(64) NOT NULL,
+  `userid` varchar(64) NOT NULL,
+  `bizrule` text,
+  `data` text,
+  PRIMARY KEY (`itemname`,`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `AuthAssignment`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AuthItem`
+--
+
+DROP TABLE IF EXISTS `AuthItem`;
+CREATE TABLE IF NOT EXISTS `AuthItem` (
+  `name` varchar(64) NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text,
+  `bizrule` text,
+  `data` text,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `AuthItem`
+--
+
+INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+('createSpecialDeal', 0, 'create special deals', NULL, 'N;'),
+('Salon', 2, '', NULL, 'N;');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AuthItemChild`
+--
+
+DROP TABLE IF EXISTS `AuthItemChild`;
+CREATE TABLE IF NOT EXISTS `AuthItemChild` (
+  `parent` varchar(64) NOT NULL,
+  `child` varchar(64) NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `AuthItemChild`
+--
+
+INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
+('Salon', 'createSpecialDeal');
 
 -- --------------------------------------------------------
 
@@ -54,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `tbl_country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tbl_country`
@@ -103,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `tbl_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tbl_role`
@@ -112,7 +177,8 @@ CREATE TABLE IF NOT EXISTS `tbl_role` (
 INSERT INTO `tbl_role` (`id`, `name`) VALUES
 (1, 'Salon'),
 (2, 'Freelancer'),
-(3, 'Authenticated');
+(3, 'Authenticated'),
+(4, 'test');
 
 -- --------------------------------------------------------
 
@@ -144,3 +210,20 @@ INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`, `email`, `password`, `c
 (8, 'Noman', 'Ahmed', 'nm@yahoo.com', '202cb962ac59075b964b07152d234b70', 3, 3, NULL),
 (15, 'John', 'Smith', 'john@yahoo.com', '202cb962ac59075b964b07152d234b70', 4, 3, '2879-right-banner-4.jpg'),
 (17, 'New', 'Password', 'new@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, 3, '765-right-banner-2.jpg');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `AuthAssignment`
+--
+ALTER TABLE `AuthAssignment`
+  ADD CONSTRAINT `AuthAssignment_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `AuthItem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `AuthItemChild`
+--
+ALTER TABLE `AuthItemChild`
+  ADD CONSTRAINT `AuthItemChild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `AuthItem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `AuthItemChild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `AuthItem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -27,12 +27,12 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'create' and 'view' actions
+			array('allow',  // allow all users to perform 'create'(signup).
 				'actions'=>array('create'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('view','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,6 +62,11 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
+      $auth = Yii::app()->authManager;
+      $role = $auth->createRole('Salon');
+      $auth->createOperation('createSpecialDeal', 'create special deals');
+      $role->addChild('createSpecialDeal');
+
 		$model=new User;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
