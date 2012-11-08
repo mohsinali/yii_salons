@@ -1,0 +1,21 @@
+$auth = Yii::app()->authManager;
+      $auth->clearAll();
+      $role = $auth->createRole('Salon');
+      $auth->createOperation('createSpecialDeal', 'create special deals');
+      $auth->createOperation('updateSpecialDeal', 'update special deals');
+      $auth->createOperation('deleteSpecialDeal', 'update special deals');
+      
+      $role->addChild('createSpecialDeal');
+      $role->addChild('updateSpecialDeal');
+      $role->addChild('deleteSpecialDeal');
+
+
+// Assign role to new user
+	$auth = Yii::app()->authManager;
+	$auth->assign('Salon', 1);
+	
+// Check access permissions
+If( Yii::app()->user->checkAccess('createIssue')){
+	//perform needed logic
+}
+

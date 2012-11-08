@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2012 at 03:33 PM
+-- Generation Time: Nov 08, 2012 at 06:58 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -38,6 +38,8 @@ CREATE TABLE IF NOT EXISTS `AuthAssignment` (
 -- Dumping data for table `AuthAssignment`
 --
 
+INSERT INTO `AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+('Salon', '1', NULL, 'N;');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `AuthItem` (
 
 INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('createSpecialDeal', 0, 'create special deals', NULL, 'N;'),
-('Salon', 2, '', NULL, 'N;');
+('deleteSpecialDeal', 0, 'update special deals', NULL, 'N;'),
+('Salon', 2, '', NULL, 'N;'),
+('updateSpecialDeal', 0, 'update special deals', NULL, 'N;');
 
 -- --------------------------------------------------------
 
@@ -82,7 +86,9 @@ CREATE TABLE IF NOT EXISTS `AuthItemChild` (
 --
 
 INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
-('Salon', 'createSpecialDeal');
+('Salon', 'createSpecialDeal'),
+('Salon', 'deleteSpecialDeal'),
+('Salon', 'updateSpecialDeal');
 
 -- --------------------------------------------------------
 
