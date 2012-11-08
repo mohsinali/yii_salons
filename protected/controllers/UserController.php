@@ -62,11 +62,6 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-      $auth = Yii::app()->authManager;
-      $role = $auth->createRole('Salon');
-      $auth->createOperation('createSpecialDeal', 'create special deals');
-      $role->addChild('createSpecialDeal');
-
 		$model=new User;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
