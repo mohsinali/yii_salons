@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2012 at 06:58 PM
+-- Generation Time: Nov 12, 2012 at 04:10 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `AuthAssignment` (
 --
 
 INSERT INTO `AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+('Authenticated', '21', NULL, 'N;'),
 ('Salon', '1', NULL, 'N;');
 
 -- --------------------------------------------------------
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `AuthItem` (
 --
 
 INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+('Authenticated', 2, '', NULL, 'N;'),
 ('createSpecialDeal', 0, 'create special deals', NULL, 'N;'),
 ('deleteSpecialDeal', 0, 'update special deals', NULL, 'N;'),
 ('Salon', 2, '', NULL, 'N;'),
@@ -161,7 +163,8 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m121018_121620_create_city_table', 1350564189),
 ('m121031_104521_create_role_table', 1351686160),
 ('m121101_113606_add_column_role_id_city_id', 1351771858),
-('m121102_085249_add_column_profile_image', 1351846481);
+('m121102_085249_add_column_profile_image', 1351846481),
+('m121112_110327_drop_role_id_column_from_tbl_user', 1352718315);
 
 -- --------------------------------------------------------
 
@@ -200,22 +203,23 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `city_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
   `profile_image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`, `email`, `password`, `city_id`, `role_id`, `profile_image`) VALUES
-(1, 'Mohsin', 'Ali', 'ma@yahoo.com', '202cb962ac59075b964b07152d234b70', 1, 1, NULL),
-(2, 'Ikram', 'Haq', 'ik@yahoo.com', '202cb962ac59075b964b07152d234b70', 2, 2, NULL),
-(8, 'Noman', 'Ahmed', 'nm@yahoo.com', '202cb962ac59075b964b07152d234b70', 3, 3, NULL),
-(15, 'John', 'Smith', 'john@yahoo.com', '202cb962ac59075b964b07152d234b70', 4, 3, '2879-right-banner-4.jpg'),
-(17, 'New', 'Password', 'new@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, 3, '765-right-banner-2.jpg');
+INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`, `email`, `password`, `city_id`, `profile_image`) VALUES
+(1, 'Mohsin', 'Ali', 'ma@yahoo.com', '202cb962ac59075b964b07152d234b70', 1, NULL),
+(2, 'Ikram', 'Haq', 'ik@yahoo.com', '202cb962ac59075b964b07152d234b70', 2, NULL),
+(8, 'Noman', 'Ahmed', 'nm@yahoo.com', '202cb962ac59075b964b07152d234b70', 3, NULL),
+(15, 'John', 'Smith', 'john@yahoo.com', '202cb962ac59075b964b07152d234b70', 4, '2879-right-banner-4.jpg'),
+(17, 'New', 'Password', 'new@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, '765-right-banner-2.jpg'),
+(20, 'New', 'Password', 'ma22@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, '1558-'),
+(21, 'New', 'Password', 'ma33@yahoo.com', '3d186804534370c3c817db0563f0e461', 3, '7900-');
 
 --
 -- Constraints for dumped tables

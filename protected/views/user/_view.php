@@ -26,7 +26,7 @@
 	<br />
         
         <b>Role:</b>
-	<?php echo CHtml::encode($data->role->name); ?>
+	<?php //echo CHtml::encode($data->role->name); ?>
 	<br />
 
 </div>

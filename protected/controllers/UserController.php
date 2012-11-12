@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'create'(signup).
-				'actions'=>array('create'),
+				'actions'=>array('create', 'index', 'view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -51,9 +51,9 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+            $this->render('view',array(
+                    'model'=>$this->loadModel($id),
+            ));
 	}
 
 	/**
@@ -63,6 +63,7 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
+                $model->user_role = "Authenticated";
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -70,7 +71,6 @@ class UserController extends Controller
 		{
                     $model->attributes=$_POST['User'];
                     $model->city_id = $_POST['city_id'];
-                    $model->role_id = 3; // 3 is for authenticated user.
                     
                     $rnd = rand(0, 9999);
                     $uploadedFile = CUploadedFile::getInstance($model, 'profile_image');
@@ -78,6 +78,7 @@ class UserController extends Controller
                     $model->profile_image = $fileName;
 
                     if($model->save()){
+                        $model->assignUserToRole();
                         $uploadedFile->saveAs(Yii::app()->basePath.'/files/user_profile_pictures/'.$fileName);
                         $this->redirect(array('view','id'=>$model->id));
                     }

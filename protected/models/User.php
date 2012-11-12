@@ -13,6 +13,7 @@
 class User extends CActiveRecord
 {
         public $repeat_password;
+        public $user_role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -57,7 +58,7 @@ class User extends CActiveRecord
                         array('repeat_password', 'required'),
                         array('repeat_password', 'length', 'min' => 6, 'max' => 40),
                         array('password', 'compare', 'compareAttribute' => 'repeat_password'),
-                        array('profile_image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => false, 'message' => '{attribute} is required.'),
+                        array('profile_image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true, 'message' => '{attribute} is required.'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, email, password', 'safe', 'on'=>'search'),
@@ -72,8 +73,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'city' => array(self::BELONGS_TO, 'City', 'city_id'),
-                    'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+                    'city' => array(self::BELONGS_TO, 'City', 'city_id'),                    
 		);
 	}
 
@@ -118,5 +118,14 @@ class User extends CActiveRecord
         
         public function encrypt($value){
             return md5($value);
+        }
+        
+        public function assignUserToRole(){
+            $auth = Yii::app()->authManager;
+            $auth->assign($this->user_role, $this->id);
+            
+//            Some sample code
+//            $auth->createRole("Authenticated");
+//            $auth->assign('role', 1);
         }
 }

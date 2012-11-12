@@ -34,7 +34,7 @@ $this->menu=array(
                 ),
                 array(
                   'label' => 'Role',
-                  'value' => $model->role->name,
+                  'value' => 'temp',//$model->role->name,
                 ),
                 
 	),
