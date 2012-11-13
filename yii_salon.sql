@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2012 at 04:10 PM
+-- Generation Time: Nov 13, 2012 at 05:56 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -164,7 +164,37 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m121031_104521_create_role_table', 1351686160),
 ('m121101_113606_add_column_role_id_city_id', 1351771858),
 ('m121102_085249_add_column_profile_image', 1351846481),
-('m121112_110327_drop_role_id_column_from_tbl_user', 1352718315);
+('m121112_110327_drop_role_id_column_from_tbl_user', 1352718315),
+('m121113_114947_create_table_tbl_profile_salon', 1352811364);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_profile_salon`
+--
+
+DROP TABLE IF EXISTS `tbl_profile_salon`;
+CREATE TABLE IF NOT EXISTS `tbl_profile_salon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `salon_name` varchar(200) NOT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `address1` varchar(255) DEFAULT NULL,
+  `address2` varchar(255) DEFAULT NULL,
+  `contact_person` varchar(255) DEFAULT NULL,
+  `contact_email` varchar(255) DEFAULT NULL,
+  `salon_type` int(11) DEFAULT NULL,
+  `salon_picture` varchar(200) DEFAULT NULL,
+  `business_description` text,
+  `services_offered` text,
+  `lattitude` decimal(10,0) DEFAULT NULL,
+  `longitude` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tbl_profile_salon`
+--
+
 
 -- --------------------------------------------------------
 

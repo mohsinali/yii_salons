@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'create'(signup).
-				'actions'=>array('create', 'index', 'view'),
+				'actions'=>array('create', 'index', 'view', 'createsalon'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -88,6 +88,15 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionCreateSalon(){
+//            http ://www.yiiframework.com/wiki/19/how-to-use-a-single-form-to-collect-data-for-two-or-more-models/
+            $model_user = new User;
+            
+            $this->render('createsalon',array(
+			'model'=>$model_user,
+            ));
+        }
 
 	/**
 	 * Updates a particular model.
