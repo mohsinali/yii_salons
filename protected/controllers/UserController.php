@@ -92,9 +92,37 @@ class UserController extends Controller
         public function actionCreateSalon(){
 //            http ://www.yiiframework.com/wiki/19/how-to-use-a-single-form-to-collect-data-for-two-or-more-models/
             $model_user = new User;
+            $model_profile_salon = new ProfileSalon;
+            $model_user->user_role = "Salon";
+            $model_user->city_id = $_POST['city_id'];
+            
+            if(isset($_POST['User']) and isset($_POST['ProfileSalon'])){
+                $model_user->attributes = $_POST['User'];
+                $model_profile_salon->attributes = $_POST['ProfileSalon'];
+                
+                $rnd = rand(0, 9999);
+                $uploadedFile = CUploadedFile::getInstance($model_user, 'profile_image');
+                $fileName = "{$rnd}-{$uploadedFile}";
+                $model_user->profile_image = $fileName;
+                
+                $model_user->validate();
+                $model_profile_salon->validate();
+                
+                if($model_user->save()){
+                    $model_user->assignUserToRole();
+                    $uploadedFile->saveAs(Yii::app()->basePath.'/files/user_profile_pictures/'.$fileName);
+
+                    $model_profile_salon->user_id = $model_user->id;
+                    if($model_profile_salon->save()){
+                        Yii::app()->user->setFlash("success", "You have been signed up as a 'Salon'.");
+                        $this->redirect(array('view','id'=>$model_user->id));
+                    }
+                }
+            }
             
             $this->render('createsalon',array(
 			'model'=>$model_user,
+                        'model_profile_salon' => $model_profile_salon,
             ));
         }
 

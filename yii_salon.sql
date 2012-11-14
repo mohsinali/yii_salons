@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2012 at 05:56 PM
+-- Generation Time: Nov 14, 2012 at 04:32 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.9
 
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `AuthAssignment` (
 
 INSERT INTO `AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 ('Authenticated', '21', NULL, 'N;'),
-('Salon', '1', NULL, 'N;');
+('Salon', '1', NULL, 'N;'),
+('Salon', '25', NULL, 'N;');
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,9 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m121101_113606_add_column_role_id_city_id', 1351771858),
 ('m121102_085249_add_column_profile_image', 1351846481),
 ('m121112_110327_drop_role_id_column_from_tbl_user', 1352718315),
-('m121113_114947_create_table_tbl_profile_salon', 1352811364);
+('m121113_114947_create_table_tbl_profile_salon', 1352811364),
+('m121113_131154_create_table_tbl_salon_type', 1352812657),
+('m121114_051943_add_column_user_id_in_tbl_profile_salon', 1352870623);
 
 -- --------------------------------------------------------
 
@@ -186,15 +189,18 @@ CREATE TABLE IF NOT EXISTS `tbl_profile_salon` (
   `salon_picture` varchar(200) DEFAULT NULL,
   `business_description` text,
   `services_offered` text,
-  `lattitude` decimal(10,0) DEFAULT NULL,
-  `longitude` decimal(10,0) DEFAULT NULL,
+  `lattitude` decimal(17,15) DEFAULT NULL,
+  `longitude` decimal(17,15) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `tbl_profile_salon`
 --
 
+INSERT INTO `tbl_profile_salon` (`id`, `salon_name`, `phone`, `address1`, `address2`, `contact_person`, `contact_email`, `salon_type`, `salon_picture`, `business_description`, `services_offered`, `lattitude`, `longitude`, `user_id`) VALUES
+(1, 'Golden Salon', '321321', 'M.C. Green Town', '', 'Shahid', 'email@yahoo.com', 1, NULL, 'loren ipos', 'lorem ipos', '24.369852800000000', '73.147852900000000', 25);
 
 -- --------------------------------------------------------
 
@@ -222,6 +228,28 @@ INSERT INTO `tbl_role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_salon_type`
+--
+
+DROP TABLE IF EXISTS `tbl_salon_type`;
+CREATE TABLE IF NOT EXISTS `tbl_salon_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tbl_salon_type`
+--
+
+INSERT INTO `tbl_salon_type` (`id`, `name`) VALUES
+(1, 'Men'),
+(2, 'Women'),
+(3, 'Unisex');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_user`
 --
 
@@ -236,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `profile_image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `tbl_user`
@@ -249,7 +277,8 @@ INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`, `email`, `password`, `c
 (15, 'John', 'Smith', 'john@yahoo.com', '202cb962ac59075b964b07152d234b70', 4, '2879-right-banner-4.jpg'),
 (17, 'New', 'Password', 'new@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, '765-right-banner-2.jpg'),
 (20, 'New', 'Password', 'ma22@yahoo.com', '3d186804534370c3c817db0563f0e461', 4, '1558-'),
-(21, 'New', 'Password', 'ma33@yahoo.com', '3d186804534370c3c817db0563f0e461', 3, '7900-');
+(21, 'New', 'Password', 'ma33@yahoo.com', '3d186804534370c3c817db0563f0e461', 3, '7900-'),
+(25, 'New user', 'last', 'hello@hotmail.com', '3d186804534370c3c817db0563f0e461', 2, '2833-product_3.jpg');
 
 --
 -- Constraints for dumped tables
