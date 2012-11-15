@@ -74,7 +74,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'city' => array(self::BELONGS_TO, 'City', 'city_id'),
-                    'salon_type' => array(self::BELONGS_TO, 'SalonType', 'salon_type'),
+                    'salon_type' => array(self::BELONGS_TO, 'SalonType', 'salon_type'),                    
 		);
 	}
 
@@ -128,5 +128,17 @@ class User extends CActiveRecord
 //            Some sample code
 //            $auth->createRole("Authenticated");
 //            $auth->assign('role', 1);
+        }
+        
+        public function getRoleById($user_id){
+            $list= Yii::app()->db->createCommand('select * from AuthAssignment where userid=:user_id')->bindValue('user_id', $user_id)->queryAll();
+
+            $rs=array();
+            foreach($list as $item){
+                //process each item here
+                $rs[]=$item;
+
+            }
+            return $rs;
         }
 }

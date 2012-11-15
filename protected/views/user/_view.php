@@ -26,7 +26,15 @@
 	<br />
         
         <b>Role:</b>
-	<?php //echo CHtml::encode($data->role->name); ?>
+	<?php $roles = User::model()->getRoleById($data->id); ?>
+        <ul>
+            <?php
+            foreach ($roles as $role) {
+                echo "<li>".$role['itemname']."</li>";
+            }
+            ?>
+        </ul>
+        
 	<br />
 
 </div>

@@ -63,7 +63,8 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-                $model->user_role = "Authenticated";
+                $model->user_role = "Authenticated";                
+                
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
