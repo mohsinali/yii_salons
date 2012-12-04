@@ -25,7 +25,7 @@ class City extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{city}}';
+		return 'city';
 	}
 
 	/**

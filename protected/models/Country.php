@@ -24,7 +24,7 @@ class Country extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{country}}';
+		return 'country';
 	}
 
 	/**

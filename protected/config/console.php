@@ -11,17 +11,17 @@ return array(
 
 	// application components
 	'components'=>array(
-//		'db'=>array(
-//			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-//		),
+		/*'db'=>array(
+			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+		),*/
+		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=yii_salon',
+			'connectionString' => 'mysql:host=localhost;dbname=yii_rights',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'root',
 			'charset' => 'utf8',
-                        'tablePrefix' => 'tbl_',
 		),
 		
 		'log'=>array(

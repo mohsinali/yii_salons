@@ -5,36 +5,20 @@
 
 <div class="view">
 
-	<b>Name:</b>
-	<?php echo CHtml::link(CHtml::encode($data->first_name)." ".CHtml::encode($data->last_name), array('view', 'id'=>$data->id)); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
-	<?php echo CHtml::encode($data->email); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?>:</b>
+	<?php echo CHtml::encode($data->username); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('password')); ?>:</b>
-	<?php echo CHtml::encode($data->password); ?>
-	<br />
-        
-        <b><?php echo CHtml::encode($data->getAttributeLabel('city_id')); ?>:</b>
-	<?php echo CHtml::encode($data->city->name); ?>
-	<br />
-        
-        <b>Country:</b>
-	<?php echo CHtml::encode($data->city->country->name); ?>
-	<br />
-        
-        <b>Role:</b>
-	<?php $roles = User::model()->getRoleById($data->id); ?>
-        <ul>
-            <?php
-            foreach ($roles as $role) {
-                echo "<li>".$role['itemname']."</li>";
-            }
-            ?>
-        </ul>
-        
+  
+  <b>Roles:</b>	
+  <?php 
+    $roles = Rights::getAssignedRoles($data->id);
+    foreach($roles as $role)
+       echo $role->name."<br />";
+  ?>
 	<br />
 
 </div>

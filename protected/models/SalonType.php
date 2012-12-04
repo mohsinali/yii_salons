@@ -24,7 +24,7 @@ class SalonType extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{salon_type}}';
+		return 'salon_type';
 	}
 
 	/**

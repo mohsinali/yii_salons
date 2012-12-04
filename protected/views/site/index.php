@@ -5,6 +5,29 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<table border="1">
+    <tr>
+        <td>
+            <h2>Free Vouchers</h2>
+            <?php
+            $vouchers = Voucher::model()->findAll();
+            $output = "<ul>";
+            foreach ($vouchers as $voucher) {
+                $output .= "<li>";
+                $output .= $voucher->name."<br />";
+                $output .= $voucher->discount."% Discount voucher"."<br />";
+                $output .= "Valid till: ".date("d M Y",strtotime($voucher->validity))."<br />";
+                $output .= "Remaining: ".$voucher->quantity."<br />";
+                $output .= "</li>";
+            }
+            $output .= "</ul>";
+            echo $output;
+            ?>
+        </td>
+        <td>Second</td>
+        <td>Third</td>
+    </tr>
+</table>
 
 <p>Congratulations! You have successfully created your Yii application.</p>
 

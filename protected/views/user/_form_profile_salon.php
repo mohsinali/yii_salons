@@ -17,6 +17,12 @@
 	<?php echo $form->errorSummary(array($model, $model_profile_salon)); ?>
 
 	<div class="row">
+            <?php echo $form->labelEx($model, 'username'); ?>
+            <?php echo $form->textField($model,'username'); ?>
+            <?php echo $form->error($model,'username'); ?>
+	</div>
+  
+  <div class="row">
             <?php echo $form->labelEx($model, 'first_name'); ?>
             <?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>200)); ?>
             <?php echo $form->error($model,'first_name'); ?>
@@ -50,7 +56,7 @@
         
         <div class="row">
             <label for="country">Country</label>
-            <?php echo CHtml::dropDownList('country_id', $model->city->country->id, 
+            <?php echo CHtml::dropDownList('country_id', 1, // $model->city->country->id 
               $this->getCountryList(),
               array(
                   'empty' => 'Select a country',
@@ -65,7 +71,7 @@
         
         <div class="row">
             <?php echo $form->labelEx($model, 'city_id'); ?>
-            <?php echo CHtml::dropDownList('city_id',$model->city->id, array() ); // , $this->getCityList(), array('empty' => 'Select a city') ?>
+            <?php echo CHtml::dropDownList('city_id',1, array() ); // , $this->getCityList(), array('empty' => 'Select a city') ?>
             <?php echo $form->error($model, 'city_id') ?>
             <!-- http ://www.yiiframework.com/wiki/24/creating-a-dependent-dropdown/ -->
         </div>

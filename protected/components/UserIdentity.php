@@ -14,7 +14,7 @@ class UserIdentity extends CUserIdentity {
      * @return boolean whether authentication succeeds.
      */
     public function authenticate() {
-        $user = User::model()->findByAttributes(array('email' => $this->username));
+        $user = User::model()->findByAttributes(array('username' => $this->username));
         if ($user === null) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         } else {
@@ -39,5 +39,3 @@ class UserIdentity extends CUserIdentity {
     }
 
 }
-
-
