@@ -10,19 +10,18 @@ $this->pageTitle=Yii::app()->name;
         <td>
             <h2>Free Vouchers</h2>
             <?php
-            $vouchers = Voucher::model()->findAll();
-            $output = "<ul>";
-            foreach ($vouchers as $voucher) {
-                $output .= "<li>";
-                $output .= $voucher->name."<br />";
-                $output .= $voucher->discount."% Discount voucher"."<br />";
-                $output .= "Valid till: ".date("d M Y",strtotime($voucher->validity))."<br />";
-                $output .= "Remaining: ".$voucher->quantity."<br />";
-                $output .= "</li>";
-            }
-            $output .= "</ul>";
-            echo $output;
+            $criteria = array('with' => array('user'), 'limit' => 5);
+            $dataProvider = new CActiveDataProvider('Voucher', array('criteria' => $criteria));
+            $dataProvider->pagination = false;
+            $this->widget('zii.widgets.CListView', array(
+                'dataProvider' => $dataProvider,
+                'itemView' => '_free_voucher',
+                'summaryText' => "",
+                'separator' => "<hr>",                
+
+            ));
             ?>
+            <hr />
         </td>
         <td>Second</td>
         <td>Third</td>

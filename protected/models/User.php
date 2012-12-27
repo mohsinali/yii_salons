@@ -56,7 +56,7 @@ class User extends CActiveRecord
         array('repeat_password', 'required'),
         array('repeat_password', 'length', 'min' => 6, 'max' => 40),
         array('password', 'compare', 'compareAttribute' => 'repeat_password'),
-        array('profile_image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true, 'message' => '{attribute} is required.'),
+        array('profile_image', 'file', 'types' => 'jpg, jpeg, gif, png', 'allowEmpty' => true, 'message' => '{attribute} is required.'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, email, password', 'safe', 'on'=>'search'),
@@ -74,6 +74,7 @@ class User extends CActiveRecord
         'city' => array(self::BELONGS_TO, 'City', 'city_id'),
         'salon_type' => array(self::BELONGS_TO, 'SalonType', 'salon_type'),
         'vouchers' => array(self::HAS_MANY, 'Voucher', 'user_id'),
+        'salon_profile' => array(self::HAS_ONE, 'ProfileSalon', 'user_id'),
 		);
 	}
 

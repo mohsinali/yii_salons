@@ -65,11 +65,6 @@ class UserController extends Controller
       $model = new User;
         $model->user_role = "Authenticated";
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-//echo "<pre>";
-//print_r($_POST);
-//echo "</pre>";
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             $model->city_id = $_POST['city_id'];
@@ -78,12 +73,13 @@ class UserController extends Controller
             $uploadedFile = CUploadedFile::getInstance($model, 'profile_image');
             $fileName = "{$rnd}-{$uploadedFile}";
             $model->profile_image = $fileName;
+            $uploadedFile->saveAs(Yii::app()->basePath.'/../images/user_profile_pictures/' . $fileName);
 
-            if ($model->save()) {
-                $model->assignUserToRole();
-                $uploadedFile->saveAs(Yii::app()->basePath . '/files/user_profile_pictures/' . $fileName);
-                $this->redirect(array('view', 'id' => $model->id));
-            }
+//            if ($model->save()) {
+//                $model->assignUserToRole();
+//                $uploadedFile->saveAs(Yii::app()->basePath.'/../images/files/user_profile_pictures/' . $fileName);
+//                $this->redirect(array('view', 'id' => $model->id));
+//            }
         }
 
         $this->render('create', array(
