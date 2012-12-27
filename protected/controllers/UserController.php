@@ -72,14 +72,13 @@ class UserController extends Controller
             $rnd = rand(0, 9999);
             $uploadedFile = CUploadedFile::getInstance($model, 'profile_image');
             $fileName = "{$rnd}-{$uploadedFile}";
-            $model->profile_image = $fileName;
-            $uploadedFile->saveAs(Yii::app()->basePath.'/../images/user_profile_pictures/' . $fileName);
+            $model->profile_image = $fileName;            
 
-//            if ($model->save()) {
-//                $model->assignUserToRole();
-//                $uploadedFile->saveAs(Yii::app()->basePath.'/../images/files/user_profile_pictures/' . $fileName);
-//                $this->redirect(array('view', 'id' => $model->id));
-//            }
+            if ($model->save()) {
+                $model->assignUserToRole();
+                $uploadedFile->saveAs(Yii::app()->basePath.'/../images/user_profile_pictures/' . $fileName);
+                $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
