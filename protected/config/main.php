@@ -18,6 +18,7 @@ return array(
 		'application.components.*',
 		'application.modules.rights.*',//add this
 		'application.modules.rights.components.*',//add this
+    'application.helpers.*',
 	),
 
 	'modules'=>array(
@@ -43,6 +44,13 @@ return array(
 		'authManager' => array(
 		  'class' => 'RDbAuthManager',//add this
 		),
+    'image'=>array(
+        'class'=>'application.extensions.image.CImageComponent',
+          // GD or ImageMagick
+          'driver'=>'GD',
+          // ImageMagick setup path
+          'params'=>array('directory'=>'/usr/lib'),
+      ),
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(
