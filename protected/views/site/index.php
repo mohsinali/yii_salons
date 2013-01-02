@@ -9,23 +9,23 @@ $this->pageTitle=Yii::app()->name;
     <tr>
         <td>
             <h2>Free Vouchers</h2>
-            <?php
-            $image = Yii::app()->image->load('images/user_profile_pictures/4748-ik_1.jpg');
-            $image->resize(50, 50)->rotate(-45)->quality(75)->sharpen(20);
-            $image->save("images/small.jpg"); // or $image->save('images/small.jpg');
+            <?php            
+            $criteria = new CDbCriteria;
+            $criteria->with = array('user');
+            $now = new CDbExpression("NOW()");
+            $criteria->addCondition('validity >= '.$now);
             
-            $criteria = array('with' => array('user'), 'limit' => 5);
+            
             $dataProvider = new CActiveDataProvider('Voucher', array('criteria' => $criteria));
             $dataProvider->pagination = false;
             $this->widget('zii.widgets.CListView', array(
                 'dataProvider' => $dataProvider,
                 'itemView' => '_free_voucher',
                 'summaryText' => "",
-                'separator' => "<hr>",                
-
+                'separator' => "<hr>",
             ));
             ?>
-            <hr />
+            More Vouchers &raquo;
         </td>
         <td>Second</td>
         <td>Third</td>

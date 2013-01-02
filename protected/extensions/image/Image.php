@@ -51,7 +51,7 @@ class Image {
 	 * @return  object
 	 */
 	public static function factory($image, $config = NULL)
-	{
+	{echo $image;die;
 		return new Image($image, $config);
 	}
 

@@ -1,7 +1,7 @@
 <?php
 
 // uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+ Yii::setPathOfAlias('local','/var/www/yii_salons');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
@@ -36,6 +36,18 @@ return array(
 
 	// application components
 	'components'=>array(
+      'widgetFactory'=>array(
+            'widgets'=>array(
+                'SAImageDisplayer'=>array(
+//                    'baseDir'=>"/var/www/yii_salons/images",
+//                    'originalFolderName'=>"originals",
+                    'sizes' => array(
+                        '50_50' => array('width' => 50, 'height' => 50),
+                        '120_80' => array('width' => 120, 'height' => 80),
+                    ),
+                ),
+            ),
+        ),
 		'user'=>array(
 			'class' => 'RWebUser',
 			// enable cookie-based authentication
@@ -49,7 +61,7 @@ return array(
           // GD or ImageMagick
           'driver'=>'GD',
           // ImageMagick setup path
-          'params'=>array('directory'=>'/usr/lib'),
+//          'params'=>array('directory'=>'/usr/lib'),
       ),
 		// uncomment the following to enable URLs in path-format
 		/*
