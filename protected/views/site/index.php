@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name;
             $criteria->with = array('user');
             $now = new CDbExpression("NOW()");
             $criteria->addCondition('validity >= '.$now);
-            
+            $criteria->addCondition('is_active = 1');
             
             $dataProvider = new CActiveDataProvider('Voucher', array('criteria' => $criteria));
             $dataProvider->pagination = false;
