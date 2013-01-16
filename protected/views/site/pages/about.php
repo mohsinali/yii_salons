@@ -6,7 +6,11 @@ $this->breadcrumbs=array(
 	'About',
 );
 ?>
-
+<script language="javascript">
+//    $(document).ready(function(){
+//        $.mobile.click();
+//    });
+</script>
 <div data-role="page">
 
 	<div data-role="header">
@@ -14,8 +18,7 @@ $this->breadcrumbs=array(
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<p>This is a "static" page. You may change the content of this page
-by updating the file <code><?php echo __FILE__; ?></code>.</p>
+		<p>This is a "static" page. You may change the content of this page by updating the file <code><?php echo __FILE__; ?></code>.</p>
 		<ul data-role="listview" data-inset="true" data-filter="true">
 			<li><a href="#">Acura</a></li>
 			<li><a href="#">Audi</a></li>
@@ -41,5 +44,5 @@ by updating the file <code><?php echo __FILE__; ?></code>.</p>
 	  </div>
 	</div>
 	<div class="ui-grid-solo">
-	  <div class="ui-block-a"><button type="button" data-theme="c">Submit</div></div>
+	  <div class="ui-block-a"><button type="button" id="test" data-theme="c">Submit</div></div>
 	</div>
