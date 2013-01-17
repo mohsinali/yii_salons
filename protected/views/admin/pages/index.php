@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 
 <table>
     <tr>
-        <td>Users</td>
+        <td><?=CHtml::link("Users", array('admin/user')); ?><br /></td>
+        <td><?=CHtml::link("Vouchers", array('admin/user')); ?><br /></td>
     </tr>
 </table>
