@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
-	$model->id,
+	$model->first_name." ".$model->last_name,
 );
 
 $this->menu=array(
@@ -16,13 +16,14 @@ $this->menu=array(
 );
 ?>
 
-<h1>View User #<?php echo $model->id; ?></h1>
+<h1><?php echo $model->first_name." ".$model->last_name; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView', array(
-    'data'=>array('id'=>$model->id, 'first_name'=>$model->first_name, 'last_name'=>$model->last_name),
+    'data'=>array('id'=>$model->id, 'first_name'=>$model->first_name, 'last_name'=>$model->last_name, 'email' => $model->email),
     'attributes'=>array(
         array('name'=>'first_name', 'label'=>'First name'),
         array('name'=>'last_name', 'label'=>'Last name'),
+        array('name'=>'email', 'label'=>'Email'),
     ),
 )); ?>
 
@@ -30,6 +31,6 @@ $this->menu=array(
     'label'=>'Back',
     'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
     'size'=>'normal', // null, 'large', 'small' or 'mini'
-    'htmlOptions' => array('class' => 'cancel'),
+    'htmlOptions' => array('class' => 'cancel', 'onclick' => 'history.back(1)'),
 )); ?>
 
